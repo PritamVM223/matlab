@@ -1,0 +1,29 @@
+n = input('Enter the number of signals you multiplexed: ');
+r = input('Enter the number of bits in each signal: ');
+
+a1 = zeros(n, r);
+
+for i = 1:n
+    disp(['Enter data bits for signal ', num2str(i), ': ']);
+    a1(i, :) = input('');
+end
+
+figure;
+for i = 1:n
+    subplot(n, 1, i);
+    stem(a1(i, :));
+    title(['Input Signal ', num2str(i)]);
+end
+
+m = reshape(a1.', 1, []);
+figure;
+stem(m);
+title('Multiplexed Signal');
+
+figure;
+for i = 1:n
+    t = m((i-1)*r + 1:i*r);
+    subplot(n, 1, i);
+    stem(t);
+    title(['Received Signal ', num2str(i)]);
+end
